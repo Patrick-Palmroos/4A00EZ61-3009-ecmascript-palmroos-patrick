@@ -12,6 +12,7 @@
     "eslint": "^8.48.0"
   },
   "dependencies": {
-    "project-name-generator": "^2.1.9"
+    "project-name-generator": "^2.1.9",
+    "readline-sync": "^1.4.10"
   }
 }
