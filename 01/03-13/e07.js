@@ -1,4 +1,5 @@
 console.log("this is one line only");
+console.log("this is one line only");
 console.log(`this can be 
 on multiple lines`);
 
