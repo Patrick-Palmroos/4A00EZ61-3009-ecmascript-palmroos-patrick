@@ -19,31 +19,45 @@ ${data}`);
 readUserFile();
 */
 
+//checks if file exists and returns a promise.
 function checkForFile() {
   let name = askFileName();
+  function asynFunc(resolve, reject) {
+    fs.exists(name, (e) => {
+      e ? resolve(name) : reject(`file ${name} doesnt exist.`);
+    });
+  }
 
-  fs.exists(name, (e) => {
-    e ? readUserJsonFile(name) : console.log(`file ${name} doesnt exist.`);
-  });
+  let prom = new Promise(asynFunc);
+  return prom;
 }
 
+//checks for json and name key and returns the value
 function readUserJsonFile(name) {
-  fs.readFile(name, "utf-8", function (err, data) {
-    if (!err) {
-      try {
-        const obj = JSON.parse(data);
-        if (obj["name"] !== undefined) {
-          console.log(obj["name"]);
-        } else {
-          console.log(`file ${name} contains json but not property name`);
+  function asynFunc(resolve, reject) {
+    fs.readFile(name, "utf-8", function (err, data) {
+      if (!err) {
+        try {
+          const obj = JSON.parse(data);
+          if (obj["name"] !== undefined) {
+            resolve(obj["name"]);
+          } else {
+            reject(`file ${name} contains json but not property name`);
+          }
+        } catch (err) {
+          reject(`File ${name} doesnt contain json`);
         }
-      } catch (err) {
-        console.log(`File ${name} doesnt contain json`);
+      } else {
+        reject(err);
       }
-    } else {
-      console.log(err);
-    }
-  });
+    });
+  }
+
+  let p = new Promise(asynFunc);
+  return p;
 }
 
-checkForFile();
+checkForFile()
+  .then((name) => readUserJsonFile(name))
+  .then((result) => console.log(result))
+  .catch((msg) => console.log(msg));
