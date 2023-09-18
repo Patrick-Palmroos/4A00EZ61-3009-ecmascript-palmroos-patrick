@@ -18,8 +18,7 @@ async function fetchName(num) {
 }
 
 async function fetchTitle(num) {
-  const newUrl = `https://swapi.dev/api/people/${num}/`;
-  let a = await fetch(newUrl)
+  let a = await fetch(`https://swapi.dev/api/people/${num}/`)
     .then((res) => res.json())
     .then((json) => json["films"][0]);
 
