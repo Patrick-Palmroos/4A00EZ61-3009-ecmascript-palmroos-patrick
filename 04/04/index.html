@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>HTML5 Page</title>
+  </head>
+  <body>
+    <script>
+      console.log(this);
+      console.log(this == window);
+      this.key1 = "donald duck";
+      window.key2 = "mickey mouse";
+      var key3 = "uncle scrooge";
+      for (value in window) {
+        document.write(`<p>key: ${value}<br> value:${window[value]}</p>`);
+      }
+    </script>
+  </body>
+</html>
+
+<!-- this shows true in the console because its asking if
+this == window, which it is since in browsers this
+tries to be the global object which in this case is called
+window-->
+
+<!--
+this.key1 = "donald duck" ====> changes key1 value to "donald duck"
+
+window.key2 = "mickey mouse" ====> does the same thing but for key 2 since window and this
+refer to the same object in this object in this scenario
+
+var key3 = "uncle scrooge" ====> this changes the value of key 3 to uncle scrooge.
+I assume that this works since var is basically also window.var
+-->
