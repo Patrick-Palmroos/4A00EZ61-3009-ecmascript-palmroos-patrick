@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "eslint": "^8.50.0"
+  },
+  "type": "module"
+}
